@@ -1,6 +1,6 @@
-// Package ctrl provides a very small and clean API for using the built-in panic
+// Package stack provides a very small and clean API for using the built-in panic
 // and recover functions to abort and resume execution of a goroutine.
-package ctrl
+package stack
 
 import "runtime/debug"
 
@@ -37,8 +37,8 @@ func Resume(fn func(error)) {
 	}
 }
 
-// Stack returns a formatted stack trace of the original call to Abort during
+// Trace returns a formatted stack trace of the original call to Abort during
 // a call to Resume.
-func Stack() []byte {
+func Trace() []byte {
 	return debug.Stack()
 }

@@ -1,4 +1,4 @@
-package ctrl
+package stack
 
 import (
 	"errors"
@@ -62,12 +62,12 @@ func TestStack(t *testing.T) {
 	func() {
 		defer Resume(func(err error) {
 			test = err
-			stack = string(Stack())
+			stack = string(Trace())
 		})
 
 		Abort(errAbortTest)
 	}()
 
 	assert.Equal(t, errAbortTest, test)
-	assert.Contains(t, stack, "ctrl.Abort")
+	assert.Contains(t, stack, "stack.Abort")
 }
