@@ -4,14 +4,13 @@ package stack
 
 import "runtime/debug"
 
-// Cause wraps errors handled by Abort and Resume.
-type Cause struct {
-	Err error
+type cause struct {
+	err error
 }
 
 // Abort will abort even if the supplied error is nil.
 func Abort(err error) {
-	panic(&Cause{err})
+	panic(cause{err})
 }
 
 // AbortIf will only abort if the supplied error is present.
@@ -29,8 +28,8 @@ func AbortIf(err error) {
 // Resume will discard that panic and continue execution.
 func Resume(fn func(error)) {
 	val := recover()
-	if cause, ok := val.(*Cause); ok {
-		fn(cause.Err)
+	if cause, ok := val.(cause); ok {
+		fn(cause.err)
 		return
 	} else if val != nil {
 		panic(val)
