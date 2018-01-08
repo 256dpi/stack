@@ -80,7 +80,7 @@ func BenchmarkAbortResume(b *testing.B) {
 	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
-		func(){
+		func() {
 			defer Resume(func(err error) {
 				// do nothing
 			})

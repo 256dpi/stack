@@ -38,6 +38,6 @@ func Resume(fn func(error)) {
 
 // Trace returns a formatted stack trace of the original call to Abort during
 // a call to Resume.
-func Trace() []byte {
-	return debug.Stack()
+func Trace() string {
+	return string(debug.Stack())
 }
